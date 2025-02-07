@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './styles/theme.css';
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+  }
+
+  html {
+    min-height: 100vh;
+    background-image: var(--gradient-background);
+    background-attachment: fixed;
+  }
+
+  body {
+    min-height: 100vh;
+    @apply text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground;
+  }
+
+  svg {
+    @apply text-foreground;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background-color: hsl(var(--glass-card-bg));
+    border: 1px solid hsl(var(--glass-card-border));
+    box-shadow: 0 4px 6px -1px hsl(var(--glass-card-shadow));
+    @apply backdrop-blur-md rounded-xl;
+  }
+
+  .glass-card:hover {
+    border-color: hsl(var(--glass-card-hover-border));
+    box-shadow: 0 8px 12px -2px hsl(var(--glass-card-hover-shadow));
+  }
+
+  .glow-text {
+    @apply text-transparent bg-clip-text font-semibold;
+    background-image: var(--text-gradient-primary);
+    text-shadow: var(--glow-text);
+  }
+
+  .subtitle-gradient {
+    @apply text-transparent bg-clip-text font-medium;
+    background-image: var(--text-gradient-secondary);
+  }
+
+  .icon-gradient {
+    @apply text-transparent fill-current;
+    background-image: var(--icon-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .icon-primary {
+    color: hsl(var(--primary));
+  }
+
+  .icon-secondary {
+    color: hsl(var(--secondary));
+  }
+
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+    background-image: var(--text-gradient-primary);
+  }
+
+  .text-gradient-secondary {
+    @apply text-transparent bg-clip-text;
+    background-image: var(--text-gradient-secondary);
+  }
+
+  .glass-button {
+    background-color: hsl(var(--button-primary-bg));
+    color: hsl(var(--button-primary-text));
+    border: 1px solid hsl(var(--button-primary-border));
+    @apply px-4 py-2 rounded-xl font-medium
+    backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2;
+    box-shadow: var(--glow-primary);
+  }
+
+  .glass-button:hover {
+    background-color: hsl(var(--button-primary-hover));
+    border-color: hsl(var(--button-primary-hover-border));
+    box-shadow: var(--glow-hover);
+    transform: translateY(-1px);
+  }
+
+  .glass-button-secondary {
+    background-color: hsl(var(--button-secondary-bg));
+    color: hsl(var(--button-secondary-text));
+    border: 1px solid hsl(var(--button-secondary-border));
+    @apply px-4 py-2 rounded-xl font-medium
+    backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2;
+  }
+
+  .glass-button-secondary:hover {
+    background-color: hsl(var(--button-secondary-hover));
+    border-color: hsl(var(--button-secondary-hover-border));
+    box-shadow: var(--glow-secondary);
+    transform: translateY(-1px);
+  }
+
+  .neon-button-primary {
+    @apply relative px-4 py-2 text-base font-medium
+    rounded-xl overflow-hidden transition-all duration-300 flex items-center justify-center gap-2;
+    background-image: var(--gradient-primary);
+    color: hsl(var(--button-primary-text));
+    border: 1px solid hsl(var(--button-primary-border));
+    box-shadow: var(--glow-primary);
+  }
+
+  .neon-button-primary:hover {
+    box-shadow: var(--glow-hover);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .neon-button-primary::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(to right,
+      hsl(var(--primary) / 0.3),
+      transparent
+    );
+  }
+
+  .neon-button-primary:hover::before {
+    @apply opacity-100;
+  }
+
+  .neon-button-secondary {
+    background-color: hsl(var(--button-secondary-bg));
+    color: hsl(var(--button-secondary-text));
+    border: 1px solid hsl(var(--button-secondary-border));
+    @apply relative px-6 py-3 text-base font-semibold
+    rounded-xl overflow-hidden transition-all duration-300
+    backdrop-blur-md;
+  }
+
+  .neon-button-secondary:hover {
+    background-color: hsl(var(--button-secondary-hover));
+    border-color: hsl(var(--button-secondary-hover-border));
+    box-shadow: var(--glow-secondary);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .glass-input {
+    background-color: hsl(var(--input-bg));
+    border: 1px solid hsl(var(--input-border));
+    color: hsl(var(--input-text));
+    @apply w-full rounded-xl px-4 py-2 backdrop-blur-md
+    transition-all duration-300;
+  }
+
+  .glass-input:focus {
+    border-color: hsl(var(--input-focus-border));
+    box-shadow: var(--glow-primary);
+    outline: none;
+    @apply ring-2 ring-[hsl(var(--input-focus-ring))];
+  }
+
+  .glass-input::placeholder {
+    color: hsl(var(--input-placeholder));
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
